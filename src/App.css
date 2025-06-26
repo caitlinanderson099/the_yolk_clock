@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-font: "Silkscreen", sans-serif;
+}
+
+body {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  color: #333;
+  text-align: center;
+  font-family: var(--main-font);
+}
+
+/* Container for the card grid - has glass bg */
+.method-cont {
+  background: rgba(231, 210, 147, 0.6);
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(231, 210, 147, 0.38);
+  max-width: 70vw;
+  max-height: 80vh;
+  padding: 20px;
+  margin: 40px;
+  place-self: center;
+}
+
+/* Grid full of cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  column-gap: 2rem;
+  row-gap: 2rem;
+}
+
+/* Method Card itself */
+.card {
+  background-color: #E7D293;
+  padding: 12px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 12px;
+}
+
+.card .card-img {
+  width: 100%;
+  img {
+    width: 50px;
+    height: 100%;
+  }
+}
+
+.card button {
+  background-color: #ffb700;
+  font-family: var(--main-font);
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card button:hover {
+  transform: scale(1.05) rotate(-6deg);
+}
+
+
+input[type="number"] {
+  margin-top: 0.5rem;
+  padding: 0.3rem;
+  width: 60px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.controls button {
+  background: #ffcf44;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  background: #ffb700;
+}
