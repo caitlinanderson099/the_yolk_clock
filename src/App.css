@@ -9,98 +9,536 @@
   --main-font: "Silkscreen", sans-serif;
 }
 
+button {
+  font-family: var(--main-font);
+}
+
 body {
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-image: url('/background.jpg');
+  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/background.jpg');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed; /* This creates the parallax effect */
   height: 100vh;
   color: #333;
   text-align: center;
   font-family: var(--main-font);
-}
-
-/* Container for the card grid - has glass bg */
-.method-cont {
-  background: rgba(231, 210, 147, 0.6);
-  border-radius: 20px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  border: 1px solid rgba(231, 210, 147, 0.38);
-  max-width: 70vw;
-  max-height: 80vh;
   padding: 20px;
-  margin: 40px;
-  place-self: center;
 }
 
-/* Grid full of cards */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  column-gap: 2rem;
-  row-gap: 2rem;
-}
 
-/* Method Card itself */
-.card {
-  background-color: #E7D293;
-  padding: 12px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 12px;
-}
-
-.card .card-img {
+/* Modal Backdrop - darkened background */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  img {
-    width: 50px;
-    height: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Box - glassy golden panel */
+.modal-box {
+  background: linear-gradient(
+    rgba(255, 236, 169, 0.3),
+    rgba(231, 210, 147, 0.4)
+  );
+  border-radius: 24px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 2px rgba(255, 222, 115, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 222, 115, 0.45);
+  padding: 2rem;
+  max-width: 420px;
+  text-align: center;
+  animation: popIn 0.5s ease-out;
+}
+
+
+/* Modal Heading */
+.modal-box h2 {
+  margin-top: 0;
+  font-size: 2rem;
+  font-family: var(--main-font);
+  color: #ffb700;
+  text-shadow: 0 2px 4px #b38700;
+}
+
+/* Modal Body Text */
+.modal-box p {
+  margin: 1rem 0 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  font-family: var(--main-font);
+}
+
+/* Gamified Button */
+.modal-box button {
+  padding: 0.7rem 1.6rem;
+  font-size: 1rem;
+  background: linear-gradient(145deg, #ffd500, #ffb700);
+  border: none;
+  border-radius: 16px;
+  font-weight: bold;
+  font-family: var(--main-font);
+  color: #333;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #d89e00;
+  transition: all 0.2s ease;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+.modal-box button:hover {
+  background: linear-gradient(145deg, #ffe44d, #ffc400);
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(255, 196, 0, 0.4);
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
   }
 }
 
-.card button {
-  background-color: #ffb700;
+/* Pop-in effect */
+@keyframes popIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* Website Headings */
+.heading {
+  font-family: var(--main-font); /* use your main font */
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #ffd500;
+  text-shadow:
+    0 2px 4px #b38700,
+    0 4px 12px #ffcf44;
+  letter-spacing: 0.15rem;
+  margin-bottom: 0.6rem;
+  user-select: none;
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+.subheading {
   font-family: var(--main-font);
-  padding: 10px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffb700;
+  text-shadow: 0 1px 3px #b38700;
+  margin-bottom: 2rem;
+  letter-spacing: 0.1rem;
+  user-select: none;
+  animation: bounceText 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow:
+      0 2px 4px #b38700,
+      0 4px 12px #ffcf44;
+  }
+  50% {
+    text-shadow:
+      0 3px 6px #d9a200,
+      0 6px 18px #ffe44d;
+  }
+}
+
+@keyframes bounceText {
+  0%, 100% {
+    transform: translateY(0);
+    color: #ffb700;
+  }
+  50% {
+    transform: translateY(-5px);
+    color: #ffd500;
+  }
+}
+
+
+
+
+/* Gamified glass panel container */
+.method-cont {
+  background: linear-gradient(
+      rgba(255, 236, 169, 0.3),
+      rgba(231, 210, 147, 0.4)
+    );
+  border-radius: 28px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15),
+              inset 0 0 0 3px rgba(255, 224, 116, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 222, 115, 0.5);
+  max-width: 80vw;
+  height: 100%;
+  padding: 2rem;
+  margin: 40px;
+  place-self: center;
+  transition: all 0.3s ease;
+  animation: popIn 0.6s ease-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Card grid layout with fun spacing */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2rem;
+  padding: 1rem;
   border-radius: 20px;
-  border: none;
+  animation: bounceInGrid 0.6s ease-in-out;
+}
+
+@keyframes bounceInGrid {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* Method Card itself */
+.card {
+  background: linear-gradient(145deg, #f6e18f, #e7d293);
+  padding: 1rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 14px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid #ffe87c;
+  position: relative;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(255, 196, 0, 0.3);
+}
+
+/* Image wrapper stays responsive and styled */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* Floating pencil edit button */
+.edit-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #fffacd;
+  border: 2px solid #ffcf44;
+  border-radius: 50%;
+  padding: 6px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.edit-button:hover {
+  background: #fff4c2;
+  transform: scale(1.1);
+}
+
+/* Main button inside card */
+.card button {
+  background: linear-gradient(145deg, #ffd500, #ffb700);
+  font-family: var(--main-font);
+  padding: 10px 16px;
+  border-radius: 16px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 0 #d89e00;
+  transition: all 0.2s ease;
 }
 
 .card button:hover {
-  transform: scale(1.05) rotate(-6deg);
+  transform: scale(1.05);
+  background: linear-gradient(145deg, #ffe44d, #ffc400);
+  box-shadow: 0 6px 12px rgba(255, 196, 0, 0.4);
+}
+
+.card button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(255, 196, 0, 0.5);
 }
 
 
 input[type="number"] {
   margin-top: 0.5rem;
-  padding: 0.3rem;
-  width: 60px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 0.4rem 0.6rem;
+  width: 70px;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid #fcd34d;
+  background: #fffbe6;
+  color: #333;
+  box-shadow: 0 0 5px rgba(255, 207, 68, 0.5);
+  transition: all 0.3s ease;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #ffe44d;
+  box-shadow: 0 0 10px rgba(255, 225, 80, 0.7);
 }
 
 .controls {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
 }
 
 .controls button {
-  background: #ffcf44;
+  background: linear-gradient(145deg, #ffd500, #ffb700);
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  border-radius: 12px;
   font-weight: bold;
+  font-size: 1rem;
+  color: #333;
   cursor: pointer;
+  box-shadow: 0 4px 0 #d89e00;
+  transition: all 0.2s ease;
+  transform: scale(1);
 }
 
 .controls button:hover {
-  background: #ffb700;
+  background: linear-gradient(145deg, #ffe44d, #ffc400);
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(255, 196, 0, 0.4);
+}
+
+.controls button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(255, 196, 0, 0.5);
+}
+
+/* ------- TIMER ------------- */
+.timer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+
+  background: linear-gradient(
+      rgba(255, 236, 169, 0.3),
+      rgba(231, 210, 147, 0.4)
+    );
+  border-radius: 28px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 3px rgba(255, 224, 116, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 222, 115, 0.5);
+
+  padding: 2rem;
+}
+
+.timer img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.done-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.done-box {
+  background: linear-gradient(145deg, #fff7d6, #f5c543);
+  border: 2px solid #ffd500;
+  border-radius: 24px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  color: #333;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.4s ease;
+}
+
+.done-box h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffb700;
+  text-shadow: 0 2px 4px #b38700;
+}
+
+.done-box p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.done-box button {
+  background: linear-gradient(145deg, #ffd500, #ffb700);
+  padding: 0.7rem 1.6rem;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #d89e00;
+  transition: transform 0.2s ease;
+}
+
+.done-box button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(145deg, #ffe44d, #ffc400);
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  /* Reduce grid columns from 3 to 2 */
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  /* Slightly smaller method container width */
+  .method-cont {
+    max-width: 90vw;
+    margin: 20px auto;
+  }
+  /* Slightly smaller font sizes for headings */
+  .heading {
+    font-size: 3rem;
+  }
+  .subheading {
+    font-size: 1.5rem;
+  }
+  /* Resize timer image */
+  .timer img {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Single column grid on narrow screens */
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  /* Reduce method container padding and margin */
+  .method-cont {
+    padding: 1.5rem;
+    margin: 15px auto;
+    max-width: 95vw;
+  }
+  /* Smaller heading fonts */
+  .heading {
+    font-size: 2.4rem;
+  }
+  .subheading {
+    font-size: 1.2rem;
+  }
+  /* Smaller timer image */
+  .timer img {
+    width: 180px;
+    height: 180px;
+  }
+  /* Make controls wrap nicely */
+  .controls {
+    gap: 0.8rem;
+  }
+  /* Make input and buttons full width on very small devices */
+  input[type="number"] {
+    width: 100%;
+    max-width: 100px;
+  }
+  .controls button {
+    flex: 1 1 100%;
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Optional: very small phones */
+@media (max-width: 400px) {
+  .heading {
+    font-size: 2rem;
+  }
+  .subheading {
+    font-size: 1rem;
+  }
+  .timer img {
+    width: 140px;
+    height: 140px;
+  }
 }

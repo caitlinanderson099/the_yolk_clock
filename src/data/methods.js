@@ -34,11 +34,12 @@ export const eggMethods = [
     description: "Creamy, soft curds",
     image: "/asset 5.png"
   },
-  {
-    id: "fried",
-    name: "Fried",
-    time: 5 * 60,
-    description: "Creamy, soft curds",
-    image: "/asset 6.png"
-  }
+ {
+  id: "fried",
+  name: "Fried",
+  time: 5 * 60,
+  description: "Crispy edges with a runny yolk",
+  image: "/asset 6.png"
+}
+
 ];
